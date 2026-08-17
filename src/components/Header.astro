@@ -8,19 +8,30 @@ import { SITE_TITLE } from '../consts';
 			<a href="/">{SITE_TITLE}</a>
 		</h2>
 
-		<button class="about-button" id="open-about" type="button">
-			¿Quieres conocerme un poco más?
-		</button>
+		<div class="header-buttons">
+			<button class="header-button" id="open-about" type="button">
+				¿Quieres conocerme un poco más?
+			</button>
+
+			<button class="header-button evidence-button" id="open-evidence" type="button">
+				Evidencias
+			</button>
+		</div>
 	</nav>
 </header>
 
-<!-- VENTANA EMERGENTE -->
-<div class="about-modal" id="about-modal">
-	<div class="about-backdrop" id="about-backdrop"></div>
 
-	<div class="about-content">
+<!-- ========================= -->
+<!-- MODAL: SOBRE MÍ -->
+<!-- ========================= -->
+
+<div class="modal" id="about-modal">
+	<div class="modal-backdrop" id="about-backdrop"></div>
+
+	<div class="modal-content">
+
 		<button
-			class="close-about"
+			class="close-button"
 			id="close-about"
 			type="button"
 			aria-label="Cerrar"
@@ -45,38 +56,98 @@ import { SITE_TITLE } from '../consts';
 			Esta página representa una pequeña muestra de mi proceso,
 			mis intereses y mi crecimiento.
 		</p>
+
 	</div>
 </div>
+
+
+<!-- ========================= -->
+<!-- MODAL: EVIDENCIAS -->
+<!-- ========================= -->
+
+<div class="modal" id="evidence-modal">
+	<div class="modal-backdrop" id="evidence-backdrop"></div>
+
+	<div class="modal-content evidence-content">
+
+		<button
+			class="close-button"
+			id="close-evidence"
+			type="button"
+			aria-label="Cerrar"
+		>
+			×
+		</button>
+
+		<div class="evidence-title">
+			<span class="evidence-icon">💻</span>
+
+			<div>
+				<h2>Evidencias</h2>
+				<p>Trabajos y actividades desarrolladas durante el curso.</p>
+			</div>
+		</div>
+
+
+		<div class="evidence-grid">
+
+			<div class="evidence-card">
+				<div class="card-icon">🗃️</div>
+				<h3>SQL</h3>
+				<p>Consultas, ejercicios y actividades desarrolladas en SQL.</p>
+				<span class="status">Próximamente</span>
+			</div>
+
+
+			<div class="evidence-card">
+				<div class="card-icon">⚙️</div>
+				<h3>PL/SQL Scripts</h3>
+				<p>Procedimientos, funciones y scripts desarrollados durante el curso.</p>
+				<span class="status">Próximamente</span>
+			</div>
+
+
+			<div class="evidence-card">
+				<div class="card-icon">📦</div>
+				<h3>NoSQL</h3>
+				<p>Ejercicios y prácticas relacionadas con bases de datos NoSQL.</p>
+				<span class="status">Próximamente</span>
+			</div>
+
+
+			<div class="evidence-card">
+				<div class="card-icon">🚀</div>
+				<h3>Proyecto</h3>
+				<p>Proyecto desarrollado durante el semestre.</p>
+				<span class="status">Próximamente</span>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
 
 <style>
 
 	header {
 		margin: 0;
 		padding: 0 1.5rem;
-
 		background: var(--header-bg);
-
 		border-bottom: 1px solid var(--header-border);
-
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-
 		position: sticky;
 		top: 0;
-
 		z-index: 100;
 	}
 
 	nav {
 		max-width: 1200px;
-
 		margin: 0 auto;
-
 		min-height: 88px;
 
 		display: flex;
-
 		align-items: center;
-
 		justify-content: space-between;
 
 		gap: 2rem;
@@ -84,88 +155,82 @@ import { SITE_TITLE } from '../consts';
 
 	h2 {
 		margin: 0;
-
 		font-size: 1.25rem;
 	}
 
 	h2 a {
 		text-decoration: none;
-
 		color: rgb(var(--black));
-
 		font-weight: 700;
 	}
 
+	.header-buttons {
+		display: flex;
+		align-items: center;
+		gap: 0.7rem;
+	}
 
-	/* BOTÓN */
-
-	.about-button {
+	.header-button {
 		border: 1px solid rgba(var(--gray), 0.4);
-
 		background: rgba(var(--gray-light), 0.2);
-
 		color: rgb(var(--black));
 
 		font-family: inherit;
-
-		font-size: 0.95rem;
-
+		font-size: 0.9rem;
 		font-weight: 600;
 
-		padding: 0.7rem 1.2rem;
+		padding: 0.7rem 1rem;
 
 		border-radius: 10px;
-
 		cursor: pointer;
 
-		transition: 0.2s ease;
+		transition:
+			transform 0.2s ease,
+			background 0.2s ease,
+			color 0.2s ease;
 	}
 
-	.about-button:hover {
-		background: var(--accent);
-
-		color: white;
-
+	.header-button:hover {
 		transform: translateY(-2px);
+		background: var(--accent);
+		color: white;
+	}
+
+	.evidence-button {
+		background: var(--accent);
+		color: white;
+		border-color: var(--accent);
 	}
 
 
-	/* VENTANA EMERGENTE */
+	/* ========================= */
+	/* MODALES */
+	/* ========================= */
 
-	.about-modal {
+	.modal {
 		position: fixed;
-
 		inset: 0;
-
 		z-index: 9999;
 
 		display: flex;
-
 		align-items: center;
-
 		justify-content: center;
 
 		padding: 1.5rem;
 
 		visibility: hidden;
-
 		opacity: 0;
 
 		transition: opacity 0.25s ease;
 	}
 
-	.about-modal.open {
+	.modal.open {
 		visibility: visible;
-
 		opacity: 1;
 	}
 
-
-	/* FONDO */
-
-	.about-backdrop {
+	.modal-backdrop {
 		position: absolute;
-
 		inset: 0;
 
 		background: rgba(0, 0, 0, 0.75);
@@ -173,12 +238,8 @@ import { SITE_TITLE } from '../consts';
 		backdrop-filter: blur(5px);
 	}
 
-
-	/* CUADRO */
-
-	.about-content {
+	.modal-content {
 		position: relative;
-
 		z-index: 1;
 
 		width: min(650px, 92vw);
@@ -192,47 +253,123 @@ import { SITE_TITLE } from '../consts';
 		box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
 	}
 
-	.about-content h2 {
-		margin: 0 0 1.3rem;
-
-		font-size: 2rem;
+	.modal-content h2 {
+		margin: 0 0 1rem;
 	}
 
-	.about-content p {
-		font-size: 1rem;
-
+	.modal-content p {
 		line-height: 1.7;
-
 		color: rgb(var(--gray-dark));
-
-		margin-bottom: 1rem;
 	}
 
 
-	/* BOTÓN X */
+	/* BOTÓN CERRAR */
 
-	.close-about {
+	.close-button {
 		position: absolute;
-
 		top: 15px;
-
 		right: 15px;
 
 		width: 42px;
-
 		height: 42px;
 
 		border: none;
-
 		border-radius: 50%;
 
 		background: rgba(var(--gray-light), 0.7);
-
 		color: rgb(var(--black));
 
 		font-size: 1.8rem;
 
 		cursor: pointer;
+	}
+
+
+	/* ========================= */
+	/* EVIDENCIAS */
+	/* ========================= */
+
+	.evidence-content {
+		width: min(900px, 94vw);
+	}
+
+	.evidence-title {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+
+		margin-bottom: 2rem;
+	}
+
+	.evidence-title h2 {
+		margin: 0;
+		font-size: 2rem;
+	}
+
+	.evidence-title p {
+		margin: 0.3rem 0 0;
+	}
+
+	.evidence-icon {
+		font-size: 2.5rem;
+	}
+
+	.evidence-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+
+		gap: 1rem;
+	}
+
+	.evidence-card {
+		padding: 1.4rem;
+
+		border-radius: 14px;
+
+		border: 1px solid rgba(var(--gray), 0.25);
+
+		background: rgba(var(--gray-light), 0.18);
+
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.evidence-card:hover {
+		transform: translateY(-3px);
+		box-shadow: var(--box-shadow);
+	}
+
+	.card-icon {
+		font-size: 2rem;
+		margin-bottom: 0.7rem;
+	}
+
+	.evidence-card h3 {
+		margin: 0 0 0.5rem;
+
+		font-size: 1.2rem;
+	}
+
+	.evidence-card p {
+		margin: 0 0 1rem;
+
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+
+	.status {
+		display: inline-block;
+
+		padding: 0.25rem 0.65rem;
+
+		border-radius: 999px;
+
+		font-size: 0.72rem;
+		font-weight: 700;
+
+		background: rgba(var(--gray-light), 0.7);
+		color: rgb(var(--gray-dark));
 	}
 
 
@@ -245,45 +382,47 @@ import { SITE_TITLE } from '../consts';
 		}
 
 		nav {
-			min-height: 75px;
-
-			gap: 1rem;
+			min-height: 76px;
 		}
 
 		h2 {
-			font-size: 1rem;
+			font-size: 0.95rem;
 		}
 
-		.about-button {
-			font-size: 0.75rem;
-
-			padding: 0.6rem 0.7rem;
+		.header-buttons {
+			gap: 0.35rem;
 		}
 
-		.about-content {
-			padding: 2rem 1.4rem;
+		.header-button {
+			font-size: 0.7rem;
+			padding: 0.55rem 0.6rem;
+		}
+
+		.evidence-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.modal-content {
+			padding: 2rem 1.3rem;
+			max-height: 85vh;
+			overflow-y: auto;
 		}
 
 	}
 
 </style>
 
+
 <script>
 
-	const openButton =
-		document.getElementById('open-about');
-
-	const closeButton =
-		document.getElementById('close-about');
-
-	const modal =
+	const aboutModal =
 		document.getElementById('about-modal');
 
-	const backdrop =
-		document.getElementById('about-backdrop');
+	const evidenceModal =
+		document.getElementById('evidence-modal');
 
 
-	function openAbout() {
+	function openModal(modal: HTMLElement | null) {
 
 		if (!modal) return;
 
@@ -294,7 +433,7 @@ import { SITE_TITLE } from '../consts';
 	}
 
 
-	function closeAbout() {
+	function closeModal(modal: HTMLElement | null) {
 
 		if (!modal) return;
 
@@ -305,27 +444,64 @@ import { SITE_TITLE } from '../consts';
 	}
 
 
-	openButton?.addEventListener(
-		'click',
-		openAbout
-	);
+	/* SOBRE MÍ */
 
-	closeButton?.addEventListener(
-		'click',
-		closeAbout
-	);
+	document
+		.getElementById('open-about')
+		?.addEventListener('click', () => {
+			openModal(aboutModal);
+		});
 
-	backdrop?.addEventListener(
-		'click',
-		closeAbout
-	);
+
+	document
+		.getElementById('close-about')
+		?.addEventListener('click', () => {
+			closeModal(aboutModal);
+		});
+
+
+	document
+		.getElementById('about-backdrop')
+		?.addEventListener('click', () => {
+			closeModal(aboutModal);
+		});
+
+
+	/* EVIDENCIAS */
+
+	document
+		.getElementById('open-evidence')
+		?.addEventListener('click', () => {
+			openModal(evidenceModal);
+		});
+
+
+	document
+		.getElementById('close-evidence')
+		?.addEventListener('click', () => {
+			closeModal(evidenceModal);
+		});
+
+
+	document
+		.getElementById('evidence-backdrop')
+		?.addEventListener('click', () => {
+			closeModal(evidenceModal);
+		});
+
+
+	/* ESC */
 
 	document.addEventListener(
 		'keydown',
 		(event) => {
 
 			if (event.key === 'Escape') {
-				closeAbout();
+
+				closeModal(aboutModal);
+
+				closeModal(evidenceModal);
+
 			}
 
 		}
