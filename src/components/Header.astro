@@ -7,10 +7,61 @@ import { SITE_TITLE } from '../consts';
 		<h2>
 			<a href="/">{SITE_TITLE}</a>
 		</h2>
+
+		<button
+			class="about-button"
+			id="open-about"
+			type="button"
+		>
+			¿Quieres conocerme un poco más?
+		</button>
 	</nav>
 </header>
 
+<!-- MODAL SOBRE MÍ -->
+<div
+	class="about-modal"
+	id="about-modal"
+	aria-hidden="true"
+>
+	<div class="about-backdrop" id="about-backdrop"></div>
+
+	<div class="about-content">
+
+		<button
+			class="close-about"
+			id="close-about"
+			type="button"
+			aria-label="Cerrar"
+		>
+			×
+		</button>
+
+		<h2>Un poco sobre mí</h2>
+
+		<p>
+			¡Hola! Soy Francisco. Este espacio fue creado para presentarme
+			y compartir un poco sobre quién soy, mis intereses y aquello
+			que me motiva.
+		</p>
+
+		<p>
+			Me considero una persona con interés por aprender, asumir nuevos
+			retos y seguir desarrollando mis conocimientos tanto a nivel
+			personal como profesional.
+		</p>
+
+		<p>
+			Esta página es una pequeña muestra de mi trabajo y de mi proceso
+			de aprendizaje.
+		</p>
+
+	</div>
+</div>
+
+
 <style>
+
 	header {
 		margin: 0;
 		padding: 0 1.5rem;
@@ -27,8 +78,12 @@ import { SITE_TITLE } from '../consts';
 		max-width: 1200px;
 		margin: 0 auto;
 		min-height: 88px;
+
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
+
+		gap: 2rem;
 	}
 
 	h2 {
@@ -40,6 +95,7 @@ import { SITE_TITLE } from '../consts';
 		text-decoration: none;
 		color: rgb(var(--black));
 		font-weight: 700;
+
 		transition: color 0.18s ease;
 	}
 
@@ -47,17 +103,269 @@ import { SITE_TITLE } from '../consts';
 		color: var(--accent);
 	}
 
+
+	/* BOTÓN ¿QUIERES CONOCERME...? */
+
+	.about-button {
+		border: 1px solid rgba(var(--gray), 0.35);
+
+		background: rgba(var(--gray-light), 0.2);
+
+		color: rgb(var(--black));
+
+		font-family: inherit;
+		font-size: 0.95rem;
+		font-weight: 600;
+
+		padding: 0.7rem 1.1rem;
+
+		border-radius: 10px;
+
+		cursor: pointer;
+
+		transition:
+			transform 0.2s ease,
+			background 0.2s ease,
+			color 0.2s ease;
+	}
+
+	.about-button:hover {
+		transform: translateY(-2px);
+
+		background: var(--accent);
+		color: white;
+	}
+
+
+	/* =========================
+	   VENTANA SOBRE MÍ
+	   ========================= */
+
+	.about-modal {
+		position: fixed;
+		inset: 0;
+
+		z-index: 9999;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		padding: 1.5rem;
+
+		visibility: hidden;
+		opacity: 0;
+
+		transition:
+			opacity 0.25s ease,
+			visibility 0.25s ease;
+	}
+
+	.about-modal.open {
+		visibility: visible;
+		opacity: 1;
+	}
+
+
+	/* Fondo oscuro */
+
+	.about-backdrop {
+		position: absolute;
+		inset: 0;
+
+		background: rgba(0, 0, 0, 0.7);
+
+		backdrop-filter: blur(5px);
+	}
+
+
+	/* Cuadro del texto */
+
+	.about-content {
+		position: relative;
+		z-index: 1;
+
+		width: min(650px, 92vw);
+
+		background: var(--bg);
+
+		border: 1px solid rgba(var(--gray), 0.25);
+
+		border-radius: 18px;
+
+		padding: 2.5rem;
+
+		box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45);
+
+		transform: translateY(15px) scale(0.97);
+
+		transition: transform 0.25s ease;
+	}
+
+	.about-modal.open .about-content {
+		transform: translateY(0) scale(1);
+	}
+
+	.about-content h2 {
+		margin: 0 2.5rem 1.3rem 0;
+
+		font-size: 2rem;
+		color: rgb(var(--black));
+	}
+
+	.about-content p {
+		margin: 0 0 1rem;
+
+		font-size: 1rem;
+		line-height: 1.75;
+
+		color: rgb(var(--gray-dark));
+	}
+
+	.about-content p:last-child {
+		margin-bottom: 0;
+	}
+
+
+	/* X para cerrar */
+
+	.close-about {
+		position: absolute;
+
+		top: 15px;
+		right: 15px;
+
+		width: 42px;
+		height: 42px;
+
+		border: none;
+		border-radius: 50%;
+
+		background: rgba(var(--gray-light), 0.7);
+
+		color: rgb(var(--black));
+
+		font-size: 1.8rem;
+		line-height: 1;
+
+		cursor: pointer;
+	}
+
+	.close-about:hover {
+		background: rgba(var(--gray), 0.3);
+	}
+
+
+	/* CELULAR */
+
 	@media (max-width: 720px) {
+
 		header {
 			padding: 0 1rem;
 		}
 
 		nav {
-			min-height: 72px;
+			min-height: 76px;
+			gap: 1rem;
 		}
 
 		h2 {
-			font-size: 1.1rem;
+			font-size: 1rem;
+		}
+
+		.about-button {
+			font-size: 0.78rem;
+			padding: 0.6rem 0.75rem;
+		}
+
+		.about-content {
+			padding: 2rem 1.4rem;
+		}
+
+		.about-content h2 {
+			font-size: 1.6rem;
 		}
 	}
+
 </style>
+
+
+<script>
+
+	function initializeAboutModal() {
+
+		const openButton =
+			document.getElementById('open-about');
+
+		const closeButton =
+			document.getElementById('close-about');
+
+		const modal =
+			document.getElementById('about-modal');
+
+		const backdrop =
+			document.getElementById('about-backdrop');
+
+
+		function openAbout() {
+
+			if (!modal) return;
+
+			modal.classList.add('open');
+
+			modal.setAttribute(
+				'aria-hidden',
+				'false'
+			);
+
+			document.body.style.overflow = 'hidden';
+		}
+
+
+		function closeAbout() {
+
+			if (!modal) return;
+
+			modal.classList.remove('open');
+
+			modal.setAttribute(
+				'aria-hidden',
+				'true'
+			);
+
+			document.body.style.overflow = '';
+		}
+
+
+		openButton?.addEventListener(
+			'click',
+			openAbout
+		);
+
+		closeButton?.addEventListener(
+			'click',
+			closeAbout
+		);
+
+		backdrop?.addEventListener(
+			'click',
+			closeAbout
+		);
+
+
+		document.addEventListener(
+			'keydown',
+			(event) => {
+
+				if (event.key === 'Escape') {
+					closeAbout();
+				}
+
+			}
+		);
+
+	}
+
+	initializeAboutModal();
+
+</script>
