@@ -12,7 +12,7 @@ export const COPYRIGHT_NAME = 'Francisco';
 
 // 站上文章內容的授權（顯示於頁尾）。與程式碼的 MIT（見 LICENSE）分開：程式 MIT、內容歸你。
 // 預設「保留所有權利」；要改用 CC 等授權，改這裡的代碼，並到 src/i18n/ui.ts 填 license.* 三個值。
-export const CONTENT_LICENSE = 'All rights reserved';
+export const CONTENT_LICENSE = '';
 
 // 全部文章列表每頁顯示篇數
 export const POSTS_PER_PAGE = 15;
