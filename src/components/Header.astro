@@ -2,32 +2,23 @@
 import { SITE_TITLE } from '../consts';
 ---
 
-<header transition:persist transition:animate="none">
+<header>
 	<nav>
 		<h2>
 			<a href="/">{SITE_TITLE}</a>
 		</h2>
 
-		<button
-			class="about-button"
-			id="open-about"
-			type="button"
-		>
+		<button class="about-button" id="open-about" type="button">
 			¿Quieres conocerme un poco más?
 		</button>
 	</nav>
 </header>
 
-<!-- MODAL SOBRE MÍ -->
-<div
-	class="about-modal"
-	id="about-modal"
-	aria-hidden="true"
->
+<!-- VENTANA EMERGENTE -->
+<div class="about-modal" id="about-modal">
 	<div class="about-backdrop" id="about-backdrop"></div>
 
 	<div class="about-content">
-
 		<button
 			class="close-about"
 			id="close-about"
@@ -40,47 +31,52 @@ import { SITE_TITLE } from '../consts';
 		<h2>Un poco sobre mí</h2>
 
 		<p>
-			¡Hola! Soy Francisco. Este espacio fue creado para presentarme
-			y compartir un poco sobre quién soy, mis intereses y aquello
-			que me motiva.
+			¡Hola! Soy Francisco. Este espacio fue creado para compartir un poco
+			sobre quién soy, mis intereses y las metas que quiero alcanzar.
 		</p>
 
 		<p>
-			Me considero una persona con interés por aprender, asumir nuevos
-			retos y seguir desarrollando mis conocimientos tanto a nivel
-			personal como profesional.
+			Me considero una persona interesada en aprender constantemente,
+			enfrentar nuevos retos y desarrollar mis conocimientos tanto
+			a nivel personal como profesional.
 		</p>
 
 		<p>
-			Esta página es una pequeña muestra de mi trabajo y de mi proceso
-			de aprendizaje.
+			Esta página representa una pequeña muestra de mi proceso,
+			mis intereses y mi crecimiento.
 		</p>
-
 	</div>
 </div>
-
 
 <style>
 
 	header {
 		margin: 0;
 		padding: 0 1.5rem;
+
 		background: var(--header-bg);
-		backdrop-filter: var(--header-backdrop);
+
 		border-bottom: 1px solid var(--header-border);
+
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+
 		position: sticky;
 		top: 0;
+
 		z-index: 100;
 	}
 
 	nav {
 		max-width: 1200px;
+
 		margin: 0 auto;
+
 		min-height: 88px;
 
 		display: flex;
+
 		align-items: center;
+
 		justify-content: space-between;
 
 		gap: 2rem;
@@ -88,157 +84,146 @@ import { SITE_TITLE } from '../consts';
 
 	h2 {
 		margin: 0;
+
 		font-size: 1.25rem;
 	}
 
 	h2 a {
 		text-decoration: none;
+
 		color: rgb(var(--black));
+
 		font-weight: 700;
-
-		transition: color 0.18s ease;
-	}
-
-	h2 a:hover {
-		color: var(--accent);
 	}
 
 
-	/* BOTÓN ¿QUIERES CONOCERME...? */
+	/* BOTÓN */
 
 	.about-button {
-		border: 1px solid rgba(var(--gray), 0.35);
+		border: 1px solid rgba(var(--gray), 0.4);
 
 		background: rgba(var(--gray-light), 0.2);
 
 		color: rgb(var(--black));
 
 		font-family: inherit;
+
 		font-size: 0.95rem;
+
 		font-weight: 600;
 
-		padding: 0.7rem 1.1rem;
+		padding: 0.7rem 1.2rem;
 
 		border-radius: 10px;
 
 		cursor: pointer;
 
-		transition:
-			transform 0.2s ease,
-			background 0.2s ease,
-			color 0.2s ease;
+		transition: 0.2s ease;
 	}
 
 	.about-button:hover {
-		transform: translateY(-2px);
-
 		background: var(--accent);
+
 		color: white;
+
+		transform: translateY(-2px);
 	}
 
 
-	/* =========================
-	   VENTANA SOBRE MÍ
-	   ========================= */
+	/* VENTANA EMERGENTE */
 
 	.about-modal {
 		position: fixed;
+
 		inset: 0;
 
 		z-index: 9999;
 
 		display: flex;
+
 		align-items: center;
+
 		justify-content: center;
 
 		padding: 1.5rem;
 
 		visibility: hidden;
+
 		opacity: 0;
 
-		transition:
-			opacity 0.25s ease,
-			visibility 0.25s ease;
+		transition: opacity 0.25s ease;
 	}
 
 	.about-modal.open {
 		visibility: visible;
+
 		opacity: 1;
 	}
 
 
-	/* Fondo oscuro */
+	/* FONDO */
 
 	.about-backdrop {
 		position: absolute;
+
 		inset: 0;
 
-		background: rgba(0, 0, 0, 0.7);
+		background: rgba(0, 0, 0, 0.75);
 
 		backdrop-filter: blur(5px);
 	}
 
 
-	/* Cuadro del texto */
+	/* CUADRO */
 
 	.about-content {
 		position: relative;
+
 		z-index: 1;
 
 		width: min(650px, 92vw);
 
 		background: var(--bg);
 
-		border: 1px solid rgba(var(--gray), 0.25);
-
 		border-radius: 18px;
 
 		padding: 2.5rem;
 
-		box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45);
-
-		transform: translateY(15px) scale(0.97);
-
-		transition: transform 0.25s ease;
-	}
-
-	.about-modal.open .about-content {
-		transform: translateY(0) scale(1);
+		box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
 	}
 
 	.about-content h2 {
-		margin: 0 2.5rem 1.3rem 0;
+		margin: 0 0 1.3rem;
 
 		font-size: 2rem;
-		color: rgb(var(--black));
 	}
 
 	.about-content p {
-		margin: 0 0 1rem;
-
 		font-size: 1rem;
-		line-height: 1.75;
+
+		line-height: 1.7;
 
 		color: rgb(var(--gray-dark));
+
+		margin-bottom: 1rem;
 	}
 
-	.about-content p:last-child {
-		margin-bottom: 0;
-	}
 
-
-	/* X para cerrar */
+	/* BOTÓN X */
 
 	.close-about {
 		position: absolute;
 
 		top: 15px;
+
 		right: 15px;
 
 		width: 42px;
+
 		height: 42px;
 
 		border: none;
+
 		border-radius: 50%;
 
 		background: rgba(var(--gray-light), 0.7);
@@ -246,13 +231,8 @@ import { SITE_TITLE } from '../consts';
 		color: rgb(var(--black));
 
 		font-size: 1.8rem;
-		line-height: 1;
 
 		cursor: pointer;
-	}
-
-	.close-about:hover {
-		background: rgba(var(--gray), 0.3);
 	}
 
 
@@ -265,7 +245,8 @@ import { SITE_TITLE } from '../consts';
 		}
 
 		nav {
-			min-height: 76px;
+			min-height: 75px;
+
 			gap: 1rem;
 		}
 
@@ -274,98 +255,80 @@ import { SITE_TITLE } from '../consts';
 		}
 
 		.about-button {
-			font-size: 0.78rem;
-			padding: 0.6rem 0.75rem;
+			font-size: 0.75rem;
+
+			padding: 0.6rem 0.7rem;
 		}
 
 		.about-content {
 			padding: 2rem 1.4rem;
 		}
 
-		.about-content h2 {
-			font-size: 1.6rem;
-		}
 	}
 
 </style>
 
-
 <script>
 
-	function initializeAboutModal() {
+	const openButton =
+		document.getElementById('open-about');
 
-		const openButton =
-			document.getElementById('open-about');
+	const closeButton =
+		document.getElementById('close-about');
 
-		const closeButton =
-			document.getElementById('close-about');
+	const modal =
+		document.getElementById('about-modal');
 
-		const modal =
-			document.getElementById('about-modal');
-
-		const backdrop =
-			document.getElementById('about-backdrop');
+	const backdrop =
+		document.getElementById('about-backdrop');
 
 
-		function openAbout() {
+	function openAbout() {
 
-			if (!modal) return;
+		if (!modal) return;
 
-			modal.classList.add('open');
+		modal.classList.add('open');
 
-			modal.setAttribute(
-				'aria-hidden',
-				'false'
-			);
-
-			document.body.style.overflow = 'hidden';
-		}
-
-
-		function closeAbout() {
-
-			if (!modal) return;
-
-			modal.classList.remove('open');
-
-			modal.setAttribute(
-				'aria-hidden',
-				'true'
-			);
-
-			document.body.style.overflow = '';
-		}
-
-
-		openButton?.addEventListener(
-			'click',
-			openAbout
-		);
-
-		closeButton?.addEventListener(
-			'click',
-			closeAbout
-		);
-
-		backdrop?.addEventListener(
-			'click',
-			closeAbout
-		);
-
-
-		document.addEventListener(
-			'keydown',
-			(event) => {
-
-				if (event.key === 'Escape') {
-					closeAbout();
-				}
-
-			}
-		);
+		document.body.style.overflow = 'hidden';
 
 	}
 
-	initializeAboutModal();
+
+	function closeAbout() {
+
+		if (!modal) return;
+
+		modal.classList.remove('open');
+
+		document.body.style.overflow = '';
+
+	}
+
+
+	openButton?.addEventListener(
+		'click',
+		openAbout
+	);
+
+	closeButton?.addEventListener(
+		'click',
+		closeAbout
+	);
+
+	backdrop?.addEventListener(
+		'click',
+		closeAbout
+	);
+
+	document.addEventListener(
+		'keydown',
+		(event) => {
+
+			if (event.key === 'Escape') {
+				closeAbout();
+			}
+
+		}
+	);
 
 </script>
